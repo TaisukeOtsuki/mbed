@@ -1,24 +1,20 @@
-
 #pragma once
-#include<mbed.h>
+#include "mbed.h"
 #include <iostream>
 
-
 namespace robocon{
-    class Motors {
-        private:
-            int max_pulse;
-            int min_pulse;
-            int zero_pulse;
-            int *value;
-            mbed::PwmOut mt;
-        public:
-            Motors();
-            void set_motor(int Period,int ZeroPoint,int Max,int Min);
-            void motor_move(int move);
-            int adjust_move(float move);
-            void throw_ball(int nagetaikakudo,int imairukakudo,int kaitensuu);
-    };
-    
+	class Motors {
+	private:
+		mbed::PwmOut mt;
+		const int max_pulse;
+		const int min_pulse;
+		const int zero_pulse;
+		int *value;
+		float adjust_move(float move);
+	public:
+		Motors(PinName, const int=20, const int=1500, const int=2000, const int=1000);
+		void motor_move(const float move);
+		void throw_ball(const float nagetaikakudo, const float imairukakudo, const float kaitensuu);
+	};
 };
 
