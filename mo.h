@@ -5,7 +5,7 @@
 
 
 namespace robocon{
-    class Motor {
+    class Motors {
         private:
             int max_pulse;
             int min_pulse;
@@ -13,10 +13,10 @@ namespace robocon{
             int *value;
             mbed::PwmOut mt;
         public:
-            Motor();
+            Motors();
             void set_motor(int Period,int ZeroPoint,int Max,int Min);
             void motor_move(int move);
-            void adjust_move(float move);
+            int adjust_move(float move);
             void throw_ball(int nagetaikakudo,int imairukakudo,int kaitensuu);
     };
     
