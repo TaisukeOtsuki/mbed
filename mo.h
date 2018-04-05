@@ -1,24 +1,31 @@
 
 #pragma once
 #include<mbed.h>
+#include<QEI.h>
 #include <iostream>
 
 
 namespace robocon{
-    class Motors {
+    class Encoder:QEI{
         private:
-            int max_pulse;
-            int min_pulse;
-            int zero_pulse;
-            int *value;
-            mbed::PwmOut mt;
+            QEI encode;
         public:
-            Motors();
-            void set_motor(int Period,int ZeroPoint,int Max,int Min);
-            void motor_move(int move);
-            int adjust_move(float move);
-            void throw_ball(int nagetaikakudo,int imairukakudo,int kaitensuu);
+        
+            Encoder(PinName,PinName,PinName,int pulsesPerRev,Encoding);
     };
-    
+    class Motors{
+        private:
+            mbed::PwmOut mt;
+            const int max_pulse;
+            const int min_pulse;
+            const int zero_pulse;
+            int *value;
+            float adjust_move(float move);
+        public:
+            Motors(PinName,const int=20,const int=1500,const int=2000,const int=1000);
+            //void set_motor(int Period,int ZeroPoint,int Max,int Min);
+            void motor_move(int move);
+            void throw_ball(const float nagetaikakudo,const float  imairukakudo,const float kaitensuu);
+    };       
 };
 
